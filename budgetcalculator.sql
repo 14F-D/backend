@@ -16,6 +16,7 @@
 -- 
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
+DROP DATABASE IF EXISTS budgetcalculator;
 -- 
 -- Set character set the client will use to send SQL statements to the server
 --
