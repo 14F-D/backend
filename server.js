@@ -18,7 +18,7 @@ app.get('/',(req,res)=>{
     })
 });
 
-require('./routes/users.routes')(app);
+require('./routes/routes')(app);
 
 const port = 3000;
 app.listen(port,()=>{
