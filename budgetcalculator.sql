@@ -1,4 +1,6 @@
 ﻿
+
+
 DROP DATABASE IF EXISTS budgetcalculator;
 
 SET NAMES 'utf8';
@@ -24,11 +26,11 @@ ALTER TABLE users
 ADD UNIQUE INDEX email (email);
 
 CREATE TABLE incomes (
-  id int(11) NOT NULL,
-  amount decimal(8, 2) NOT NULL,
-  date datetime DEFAULT NULL,
-  type varchar(255) DEFAULT NULL,
-  userId int(11) NOT NULL,
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  amount DECIMAL(8, 2) NOT NULL,
+  date DATETIME NOT NULL,
+  type VARCHAR(255) NOT NULL,
+  userId INT(11) NOT NULL,
   PRIMARY KEY (id)
 )
 CHARACTER SET utf8mb4,
@@ -37,11 +39,12 @@ ALTER TABLE incomes
 ADD CONSTRAINT FK_incomes_userId FOREIGN KEY (userId)
 REFERENCES users (id) ON DELETE NO ACTION;
 
+
 CREATE TABLE expenses (
-  id int(11) NOT NULL,
-  date datetime DEFAULT NULL,
-  amount decimal(8, 2) NOT NULL,
-  userId int(11) DEFAULT NULL,
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  date DATETIME NOT NULL,
+  amount DECIMAL(8, 2) NOT NULL,
+  userId INT(11) DEFAULT NULL,
   PRIMARY KEY (id)
 )
 CHARACTER SET utf8mb4,
@@ -50,18 +53,21 @@ ALTER TABLE expenses
 ADD CONSTRAINT FK_expenses_userId FOREIGN KEY (userId)
 REFERENCES users (id) ON DELETE NO ACTION;
 
+
+
 CREATE TABLE tags (
-  id int(11) NOT NULL,
-  name varchar(50) NOT NULL,
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  name VARCHAR(50) NOT NULL,
   PRIMARY KEY (id)
 )
 CHARACTER SET utf8mb4,
 COLLATE utf8mb4_hungarian_ci;
 
+
 CREATE TABLE tags_expenses (
-  id int(11) NOT NULL,
-  tagId int(11) NOT NULL,
-  expenseId int(11) NOT NULL,
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  tagId INT(11) NOT NULL,
+  expenseId INT(11) NOT NULL,
   PRIMARY KEY (id)
 )
 CHARACTER SET utf8mb4,
@@ -73,7 +79,8 @@ ALTER TABLE tags_expenses
 ADD CONSTRAINT FK_tags_expenses_tagId FOREIGN KEY (tagId)
 REFERENCES tags (id) ON DELETE NO ACTION;
 
-INSERT INTO users VALUES
+
+INSERT INTO users(id,username,password,email,role) VALUES
 (1, 'Peter2001', 'NFVTXHfm/um3v6duDhfNHw==', 'halasz.peter1@students.jedlik.eu', 'admin'),
 (2, 'Ligon568', 'MFTTXHfm/um1v2mbDhfNHw==', 'Ligon@example.com', 'standard'),
 (3, 'Goetz1965', '6/qo4PQd1lQZU9dqtsX0WQ==', 'Burrows865@example.com', 'standard'),
@@ -117,7 +124,7 @@ INSERT INTO users VALUES
 (41, 'Kenna511', 'j8MroYAv/M395v2r6oTGHQ==', 'SalleyBeckett@example.com', 'standard');
 
 
-INSERT INTO tags VALUES
+INSERT INTO tags(id,name) VALUES
 (1, 'Games'),
 (2, 'Movies'),
 (3, 'Accessories'),
@@ -150,7 +157,7 @@ INSERT INTO tags VALUES
 (30, 'Electronics');
 
 
-INSERT INTO expenses VALUES
+INSERT INTO expenses(id,date,amount,userId) VALUES
 (1, '2020-01-01 00:10:38', 112299.00, 40),
 (2, '2020-09-28 03:51:53', 98124.00, 15),
 (3, '2020-01-01 00:00:10', 130460.00, 27),
@@ -193,7 +200,7 @@ INSERT INTO expenses VALUES
 (40, '2022-05-18 23:11:25', 125983.00, 4);
 
 
-INSERT INTO tags_expenses VALUES
+INSERT INTO tags_expenses(id,tagId,expenseId) VALUES
 (1, 27, 32),
 (2, 18, 1),
 (3, 7, 37),
@@ -236,7 +243,7 @@ INSERT INTO tags_expenses VALUES
 (40, 1, 4);
 
 
-INSERT INTO incomes VALUES
+INSERT INTO incomes(id,amount,date,type,userId) VALUES
 (1, 102395.00, '2020-01-08 00:00:01', 'transfer', 3),
 (2, 110853.00, '2020-02-07 00:00:01', 'transfer', 14),
 (3, 252094.00, '2020-03-08 00:00:01', 'salary', 32),
