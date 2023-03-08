@@ -1,5 +1,5 @@
 const connection = require('../config/db');
-
+const bcrypt = require('bcryptjs');
 
 const users = {
     getAllUsers(req, res) {
@@ -16,10 +16,10 @@ const users = {
 
         });
     },
-    getUsersById(req,res){
+    getUsersById(req, res) {
         const id = req.params.id;
         const sql = 'select * from users where id = ?'
-        connection.query(sql,id, (err, data) => {
+        connection.query(sql, id, (err, data) => {
             if (err) {
                 res.status(500).send({
                     message: err.message || 'Unkown error'
@@ -36,32 +36,62 @@ const users = {
             }
         });
     },
-    create(req, res) {
-        if (validate(req, res)) { return }
 
-        const newUser = {
-            username: req.body.username,
-            password: req.body.password,
-            email: req.body.email,
-            role: "standard"
-        };
-        const sql = 'insert into users set ?';
-        connection.query(sql, newUser, (err, data) => {
-            if (err) {
-                res.status(500).send({
-                    message: err.message || 'Unkown error'
-                })
+
+    register(req, res) {
+        const { username, password, email } = req.body;
+        const hashedPassword = bcrypt.hashSync(password, 10);
+        const user = { username, password: hashedPassword, email, role: "standard" };
+
+        connection.query('INSERT INTO users SET ?', user, (error, results) => {
+            if (error) {
+                console.log(error);
+                res.status(500).json({ message: 'An error occurred' });
+            } else {
+                res.status(200).json({ message: 'User registered successfully' });
             }
-            else {
-                res.send(
-                    {
-                        id: data.insertId,
-                        ...newUser
-                    }
-                );
-            }
-        })
+        });
     },
+    login(req, res) {
+        const { username, password } = req.body;
+        if (!username || !password) {
+            return res.status(400).json({ message: 'Username and password are required' });
+        }
+
+        // Find user in database
+        connection.query('SELECT * FROM users WHERE username = ?', [username], (err, results) => {
+            if (err) {
+                throw err;
+            }
+            if (results.length === 0) {
+                return res.status(401).json({ message: 'Invalid username or password' });
+            }
+
+            // Compare passwords
+            const user = results[0];
+            bcrypt.compare(password, user.password, (err, match) => {
+                if (err) {
+                    throw err;
+                }
+                if (!match) {
+                    return res.status(401).json({ message: 'Invalid username or password' });
+                }
+
+                // Create session
+                req.session.user = {
+                    id: user.id,
+                    username: user.username
+                };
+                res.json({ message: 'Logged in successfully' });
+            });
+        });
+    },
+    logout(req,res){
+        req.session.destroy();
+        res.json({ message: 'Logged out successfully' });
+    },
+
+
     update(req, res) {
         if (validate(req, res)) { return }
         const id = req.params.id;
@@ -131,19 +161,19 @@ function validate(req, res) {
         });
         return true;
     }
-    if (req.body.username=='') {
+    if (req.body.username == '') {
         res.status(400).send({
             message: 'Username required!'
         });
         return true;
     }
-    if (req.body.password=='') {
+    if (req.body.password == '') {
         res.status(400).send({
             message: 'Password required!'
         });
         return true;
     }
-    if (req.body.email=='') {
+    if (req.body.email == '') {
         res.status(400).send({
             message: 'Email required!'
         });

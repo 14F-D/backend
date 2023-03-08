@@ -12,10 +12,12 @@ module.exports = (app) =>{
     
     const users =  require('../controllers/user.controller');
     router.get('/users',users.getAllUsers);
-    router.post('/users',users.create);
+    router.post('/register',users.register);
     router.put('/users/:id',users.update);
     router.delete('/users/:id',users.delete);
     router.get('/users/:id',users.getUsersById);
+    router.post('/login',users.login);
+    router.post('/logout',users.logout);
 
 
     app.use('/api',router)
