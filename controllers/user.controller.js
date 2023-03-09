@@ -86,13 +86,13 @@ const users = {
             });
         });
     },
-    logout(req,res){
+    logout(req, res) {
         if (req.session.user) {
             req.session.destroy();
             res.json({ message: 'Logged out successfully' });
         }
-        else{
-            res.json({message:'Unauthorized'})
+        else {
+            res.json({ message: 'Unauthorized' })
         }
     },
 
@@ -130,33 +130,52 @@ const users = {
         );
     },
     delete(req, res) {
-        const id = req.params.id;
-        const sql = 'delete from users where id = ?'
-        connection.query(
-            sql,
-            id,
-            (err, data) => {
-                if (err) {
-                    res.status(500).send({
-                        message: err.message || 'Unkown error'
-                    })
-                }
-                else {
-                    if (data.affectedRows == 0) {
-                        // nincs ilyen ID-jü rekord
-                        res.status(404).send({
-                            message: `Not found user with id: ${req.params.id}.`
-                        });
-                        return; //kilépés a fv-ből
+
+        if (!checkRole('admin')) {
+            res.status(402).send({
+                message: "Unauthorized access!"
+            })
+        }
+        else {
+            const id = req.params.id;
+            const sql = 'delete from users where id = ?'
+            connection.query(
+                sql,
+                id,
+                (err, data) => {
+                    if (err) {
+                        res.status(500).send({
+                            message: err.message || 'Unkown error'
+                        })
                     }
-                    res.send({
-                        message: "User was successfully deleted!"
-                    })
+                    else {
+                        if (data.affectedRows == 0) {
+                            // nincs ilyen ID-jü rekord
+                            res.status(404).send({
+                                message: `Not found user with id: ${req.params.id}.`
+                            });
+                            return; //kilépés a fv-ből
+                        }
+                        res.send({
+                            message: "User was successfully deleted!"
+                        })
+                    }
                 }
-            }
-        )
+            )
+        }
     },
 }
+
+const checkRole = (role) => {
+    return (req, res, next) => {
+        if (req.session.user.role === role) {
+            next();
+        } else {
+            res.status(401).send('Unauthorized');
+        }
+    };
+};
+
 
 function validate(req, res) {
     //console.log(req.body)
