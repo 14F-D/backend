@@ -87,8 +87,13 @@ const users = {
         });
     },
     logout(req,res){
-        req.session.destroy();
-        res.json({ message: 'Logged out successfully' });
+        if (req.session.user) {
+            req.session.destroy();
+            res.json({ message: 'Logged out successfully' });
+        }
+        else{
+            res.json({message:'Unauthorized'})
+        }
     },
 
 
