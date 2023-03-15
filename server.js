@@ -26,13 +26,13 @@ app.use(session({
     cookie: { secure: true }
 }));
 
-app.use(async (req, res, next) => {
-    if (req.session.user) {
-      next();
-    } else {
-      res.redirect('/login');
-    }
-  });
+// app.use(async (req, res, next) => {
+//     if (req.session.user) {
+//       next();
+//     } else {
+//       res.redirect('/login');
+//     }
+//   });
 
 
 app.get('/',(req,res)=>{

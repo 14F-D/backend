@@ -1,8 +1,8 @@
 const connection = require('../config/db');
 
-const expenses = {
-    getAllExpenses(req, res) {
-        let sql = 'select * from expenses'
+const incomes = {
+    getAllIncomes(req, res) {
+        let sql = 'select * from incomes'
         connection.query(sql, (err, data) => {
             if (err) {
                 res.status(500).send({
@@ -14,10 +14,10 @@ const expenses = {
             }
         });
     },
-    getExpensesByUserId(req,res){
+    getIncomesByincomeId(req,res){
         const id = req.params.id;
-        const sql = `SELECT * FROM expenses
-                     WHERE userId = ?;`
+        const sql = `SELECT * FROM incomes
+                     WHERE incomeId = ?;`
         connection.query(sql,id, (err, data) => {
             if (err) {
                 res.status(500).send({
@@ -36,13 +36,13 @@ const expenses = {
         });
     },
     create(req, res) {
-        const newExpense = {
+        const newIncome = {
             amount: req.body.amount,
             date: new Date().toJSON(),
             userId: 1
         };
-        const sql = 'insert into expenses set ?';
-        connection.query(sql, newExpense, (err, data) => {
+        const sql = 'insert into incomes set ?';
+        connection.query(sql, newIncome, (err, data) => {
             if (err) {
                 res.status(500).send({
                     message: err.message || 'Unknown error'
@@ -52,7 +52,7 @@ const expenses = {
                 res.send(
                     {
                         id: data.insertId,
-                        ...newExpense
+                        ...newIncome
                     }
                 );
             }
@@ -60,14 +60,15 @@ const expenses = {
     },
     update(req, res) {
         const id = req.params.id;
-        const expense = {
+        const income = {
             amount: req.body.amount,
+            type: req.body.type,
             date: req.body.date,
         }
-        const sql = "update expenses set amount = ?, date = ? where id = ?";
+        const sql = "update incomes set amount = ?, type = ?, date = ? where id = ?";
         connection.query(
             sql,
-            [expense.amount, expense.date, id],
+            [income.amount, income.type, income.date, id],
             (err, data) => {
                 if (err) {
                     res.status(500).send({
@@ -77,12 +78,12 @@ const expenses = {
                 else {
                     if (data.affectedRows == 0) {
                         res.status(404).send({
-                            message: `Not found expense with id: ${req.params.id}.`
+                            message: `Not found income with id: ${req.params.id}.`
                         });
                     }
                     res.send({
                         id: id,
-                        ...expense
+                        ...income
                     })
                 }
             }
@@ -90,7 +91,7 @@ const expenses = {
     },
     delete(req, res) {
             const id = req.params.id;
-            const sql = 'delete from expenses where id = ?'
+            const sql = 'delete from incomes where id = ?'
             connection.query(
                 sql,
                 id,
@@ -103,19 +104,16 @@ const expenses = {
                     else {
                         if (data.affectedRows == 0) {
                             res.status(404).send({
-                                message: `Not found expense with id: ${req.params.id}.`
+                                message: `Not found income with id: ${req.params.id}.`
                             });
                             return;
                         }
                         res.send({
-                            message: "Expense was successfully deleted!"
+                            message: "Income was successfully deleted!"
                     })
                 }
             }
         )
     },
 }
-module.exports = expenses;
-
-//SELECT * FROM expenses
-//WHERE userId = 11 and MONTH(date) = MONTH(NOW());
+module.exports = incomes;
