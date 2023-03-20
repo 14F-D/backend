@@ -39,11 +39,14 @@ const users = {
 
 
     register(req, res) {
-        const { username, password, email } = req.body;
-        const hashedPassword = bcrypt.hashSync(password, 10);
-        const user = { username, password: hashedPassword, email, role: "standard" };
+        const username = req.body.username;
+        const password = req.body.password;
+        const email = req.body.email;
+        const hashedPassword = bcrypt.hashSync(`${password}`, 8);
 
-        connection.query('INSERT INTO users SET ?', user, (error, results) => {
+        const sql = "INSERT INTO users SET ?"
+
+        connection.query(sql, { username, password: hashedPassword, email, role: "standard" }, (error, results) => {
             if (error) {
                 console.log(error);
                 res.status(500).json({ message: 'An error occurred' });
@@ -69,6 +72,7 @@ const users = {
 
             // Compare passwords
             const user = results[0];
+            console.log(user)
             bcrypt.compare(password, user.password, (err, match) => {
                 if (err) {
                     throw err;
@@ -80,7 +84,8 @@ const users = {
                 // Create session
                 req.session.user = {
                     id: user.id,
-                    username: user.username
+                    username: user.username,
+                    role: user.role
                 };
                 res.json({ message: 'Logged in successfully' });
             });
@@ -131,50 +136,62 @@ const users = {
     },
     delete(req, res) {
 
-        if (!checkRole('admin')) {
-            res.status(402).send({
-                message: "Unauthorized access!"
-            })
-        }
-        else {
-            const id = req.params.id;
-            const sql = 'delete from users where id = ?'
-            connection.query(
-                sql,
-                id,
-                (err, data) => {
-                    if (err) {
-                        res.status(500).send({
-                            message: err.message || 'Unkown error'
-                        })
-                    }
-                    else {
-                        if (data.affectedRows == 0) {
-                            // nincs ilyen ID-jü rekord
-                            res.status(404).send({
-                                message: `Not found user with id: ${req.params.id}.`
-                            });
-                            return; //kilépés a fv-ből
+        const user = req.session.user;
+        console.log(user)
+        const id = req.params.id;
+        if (user != undefined) {
+            if (IsAdmin(user) || user.id == req.params.id) {
+                const sql = 'delete from users where id = ?'
+                connection.query(
+                    sql,
+                    id,
+                    (err, data) => {
+                        if (err) {
+                            res.status(500).send({
+                                message: err.message || 'Unkown error'
+                            })
                         }
-                        res.send({
-                            message: "User was successfully deleted!"
-                        })
+                        else {
+                            if (data.affectedRows == 0) {
+                                // nincs ilyen ID-jü rekord
+                                res.status(404).send({
+                                    message: `Not found user with id: ${req.params.id}.`
+                                });
+                                return; //kilépés a fv-ből
+                            }
+                            res.send({
+                                message: "User was successfully deleted!"
+                            })
+                        }
                     }
-                }
-            )
+                )
+
+            }
+            else {
+                res.status(402).send({
+                    message: "Unauthorized access!"
+                })
+            }
         }
+        else
+            res.status(404).send({message: "You are not logged in!"})
     },
 }
 
-const checkRole = (role) => {
-    return (req, res, next) => {
-        if (req.session.user.role === role) {
-            next();
-        } else {
-            res.status(401).send('Unauthorized');
-        }
-    };
-};
+function IsAdmin(user) {
+    if (user == undefined) {
+        res.status(404).send({message: "You are not logged in!"})
+        return false
+
+       
+    }
+    else{
+        if (user.role == "admin")
+        return true
+    else
+        return false
+    }
+}
 
 
 function validate(req, res) {

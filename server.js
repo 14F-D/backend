@@ -1,8 +1,6 @@
 const express = require('express');
 const cors = require('cors');
 const session = require('express-session');
-const bcryptjs = require('bcryptjs');
-const bcrypt = require('bcryptjs/dist/bcrypt');
 const crypto = require('crypto');
 const cookieParser = require('cookie-parser');
 
@@ -23,7 +21,7 @@ app.use(session({
     secret: crypto.randomBytes(20).toString('hex') ,
     resave: false,
     saveUninitialized: false,
-    cookie: { secure: true }
+    cookie: { secure: false, maxAge: 6000}
 }));
 
 // app.use(async (req, res, next) => {
