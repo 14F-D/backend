@@ -21,17 +21,8 @@ app.use(session({
     secret: crypto.randomBytes(20).toString('hex') ,
     resave: false,
     saveUninitialized: false,
-    cookie: { secure: false, maxAge: 6000}
+    cookie: { secure: false, maxAge: 60000}
 }));
-
-// app.use(async (req, res, next) => {
-//     if (req.session.user) {
-//       next();
-//     } else {
-//       res.redirect('/login');
-//     }
-//   });
-
 
 app.get('/',(req,res)=>{
     res.json({

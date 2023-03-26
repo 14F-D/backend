@@ -1,10 +1,10 @@
 const mysql = require("mysql");
 
 const connection = mysql.createPool({
-    host:'127.0.0.1',
-    user:'root',
-    password:'',
-    database:'budgetcalculator'
+    host:'sql.freedb.tech',
+    user:'freedb_HalaszPeter1',
+    password:'9x*pS?t%&nHR3mx',
+    database:'freedb_budgetcalc'
 });
 
 module.exports = connection;
