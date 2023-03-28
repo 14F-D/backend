@@ -16,7 +16,7 @@ module.exports = (app) =>{
     router.get('/users',adminAuth,users.getAllUsers);
     router.post('/register',users.register);
     router.put('/users/:id',userAuth,users.update);
-    router.delete('/users/:id',users.delete);
+    router.delete('/users/:id',userAuth,users.delete);
     router.get('/users/:id',adminAuth,users.getUsersById);
     router.post('/login',users.login);
     router.post('/logout',users.logout);
@@ -24,7 +24,7 @@ module.exports = (app) =>{
     
     const incomes =  require('../controllers/incomes.controller');
     router.get('/incomes/',adminAuth,incomes.getAllIncomes);
-    router.get('/incomes/:id',userAuth,incomes.getIncomesByincomeId);
+    router.get('/incomes/:id',userAuth,incomes.getIncomesByUserId);
     router.post('/incomes/create',userAuth,incomes.create);
     router.put('/incomes/update/:id',userAuth,incomes.update);
     router.delete('/incomes/delete/:id',userAuth,incomes.delete);

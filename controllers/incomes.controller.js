@@ -14,10 +14,10 @@ const incomes = {
             }
         });
     },
-    getIncomesByincomeId(req,res){
+    getIncomesByUserId(req,res){
         const id = req.params.id;
         const sql = `SELECT * FROM incomes
-                     WHERE incomeId = ?;`
+                     WHERE userId = ?;`
         connection.query(sql,id, (err, data) => {
             if (err) {
                 res.status(500).send({
@@ -39,7 +39,7 @@ const incomes = {
         const newIncome = {
             amount: req.body.amount,
             date: new Date().toJSON(),
-            userId: 1
+            userId: req.session.user.id
         };
         const sql = 'insert into incomes set ?';
         connection.query(sql, newIncome, (err, data) => {

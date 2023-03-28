@@ -1,5 +1,6 @@
 const connection = require('../config/db');
 const bcrypt = require('bcryptjs');
+const validator = require('validator');
 
 const users = {
     getAllUsers(req, res) {
@@ -46,7 +47,7 @@ const users = {
 
         const sql = "INSERT INTO users SET ?"
 
-        connection.query(sql, { username, password: hashedPassword, email, role: "admin" }, (error, results) => {
+        connection.query(sql, { username, password: hashedPassword, email, role: "standard" }, (error, results) => {
             if (error) {
                 console.log(error);
                 res.status(500).json({ message: 'An error occurred' });
@@ -135,70 +136,46 @@ const users = {
         );
     },
     delete(req, res) {
-
-        const user = req.session.user;
-        console.log(user)
         const id = req.params.id;
-        if (user != undefined) {
-            if (IsAdmin(user) || user.id == req.params.id) {
-                const sql = 'delete from users where id = ?'
-                connection.query(
-                    sql,
-                    id,
-                    (err, data) => {
-                        if (err) {
-                            res.status(500).send({
-                                message: err.message || 'Unkown error'
-                            })
-                        }
-                        else {
-                            if (data.affectedRows == 0) {
-                                // nincs ilyen ID-jü rekord
-                                res.status(404).send({
-                                    message: `Not found user with id: ${req.params.id}.`
-                                });
-                                return; //kilépés a fv-ből
-                            }
-                            res.send({
-                                message: "User was successfully deleted!"
-                            })
-                        }
+
+        if(req.session.user.id == id || req.session.user.role  == "admin"){
+            const sql = 'delete from users where id = ?'
+            connection.query(
+                sql,
+                id,
+                (err, data) => {
+                if (err) {
+                    res.status(500).send({
+                        message: err.message || 'Unkown error'
+                    })
+                }
+                else {
+                    if (data.affectedRows == 0) {
+                        // nincs ilyen ID-jü rekord
+                        res.status(404).send({
+                            message: `Not found user with id: ${req.params.id}.`
+                        });
+                        return; //kilépés a fv-ből
                     }
-                )
-
+                    res.send({
+                        message: "User was successfully deleted!"
+                    })
+                }
             }
-            else {
-                res.status(402).send({
-                    message: "Unauthorized access!"
-                })
-            }
+            )
+            
         }
-        else
-            res.status(404).send({message: "You are not logged in!"})
-    },
-}
-
-function IsAdmin(user) {
-    if (user == undefined) {
-        res.status(404).send({message: "You are not logged in!"})
-        return false
-
-       
+        else{
+            res.json({msg: "Access Denied"})
+        }
     }
-    else{
-        if (user.role == "admin")
-        return true
-    else
-        return false
-    }
+    
 }
-
-
-function validate(req, res) {
-    //console.log(req.body)
-    if (JSON.stringify(req.body) == {}) {
-        res.status(400).send({
-            message: 'Content cannot be empty!'
+    function validate(req, res) {
+        //console.log(req.body)
+        if (JSON.stringify(req.body) == {}) {
+            res.status(400).send({
+                message: 'Content cannot be empty!'
         });
         return true;
     }
