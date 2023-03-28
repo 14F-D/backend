@@ -37,7 +37,7 @@ CHARACTER SET utf8mb4,
 COLLATE utf8mb4_hungarian_ci;
 ALTER TABLE incomes
 ADD CONSTRAINT FK_incomes_userId FOREIGN KEY (userId)
-REFERENCES users (id) ON DELETE NO ACTION;
+REFERENCES users (id) ON DELETE CASCADE;
 
 
 CREATE TABLE expenses (
@@ -51,7 +51,7 @@ CHARACTER SET utf8mb4,
 COLLATE utf8mb4_hungarian_ci;
 ALTER TABLE expenses
 ADD CONSTRAINT FK_expenses_userId FOREIGN KEY (userId)
-REFERENCES users (id) ON DELETE NO ACTION;
+REFERENCES users (id) ON DELETE CASCADE;
 
 
 
@@ -74,10 +74,10 @@ CHARACTER SET utf8mb4,
 COLLATE utf8mb4_hungarian_ci;
 ALTER TABLE tags_expenses
 ADD CONSTRAINT FK_tags_expenses_expenseId FOREIGN KEY (expenseId)
-REFERENCES expenses (id) ON DELETE NO ACTION;
+REFERENCES expenses (id) ON DELETE CASCADE;
 ALTER TABLE tags_expenses
 ADD CONSTRAINT FK_tags_expenses_tagId FOREIGN KEY (tagId)
-REFERENCES tags (id) ON DELETE NO ACTION;
+REFERENCES tags (id) ON DELETE CASCADE;
 
 
 INSERT INTO users(id,username,password,email,role) VALUES
