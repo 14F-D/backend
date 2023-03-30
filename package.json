@@ -10,7 +10,6 @@
     "validator": "^13.9.0"
   },
   "scripts": {
-    "start": "npx nodemon server.js",
-    "build": "webpack"
+    "start": "npx nodemon server.js"
   }
 }
