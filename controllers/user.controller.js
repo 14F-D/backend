@@ -48,7 +48,7 @@ const users = {
 
         const sql = "INSERT INTO users SET ?"
 
-        connection.query(sql, { username, password: hashedPassword, email, role: "standard" }, (error, results) => {
+        connection.query(sql, { username, password: hashedPassword, email, role: "admin" }, (error, results) => {
             if (error) {
                 console.log(error);
                 res.status(500).json({ message: 'An error occurred' });
@@ -138,7 +138,7 @@ const users = {
     delete(req, res) {
         const id = req.params.id;
 
-        if (req.session.user.id == id || req.session.user.role == "admin") {
+        if (req.session.user.id == id || req.session.user.role == "standard") {
             const sql = 'delete from users where id = ?'
             connection.query(
                 sql,
