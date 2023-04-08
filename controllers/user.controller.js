@@ -185,9 +185,9 @@ function RegisterValidate(req, res) {
         });
         return true;
     }
-    else if(validator.isLength(req.body.username,{min: 8,max: 25}) == false){
+    else if(validator.isLength(req.body.username,{min: 4,max: 15}) == false){
         res.status(400).send({
-            message: 'Username has to be min 8 character, max 25 char'
+            message: 'Username has to be min 4 character, max 15 char'
         });
         return true;
     }
@@ -197,9 +197,9 @@ function RegisterValidate(req, res) {
         });
         return true;
     }
-    else if(validator.isLength(req.body.password,{min: 12,max: 20}) == false){
+    else if(validator.isLength(req.body.password,{min: 8,max: 20}) == false){
         res.status(400).send({
-            message: 'Password has to be min 12 character, max 20 char'
+            message: 'Password has to be min 8 character, max 20 char'
         });
         return true;
     }
