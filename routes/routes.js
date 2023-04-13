@@ -5,7 +5,7 @@ module.exports = (app) =>{
     
     
     const expenses =  require('../controllers/expenses.controller');
-    router.get('/expenses/',adminAuth,expenses.getAllExpenses);
+    router.get('/expenses',adminAuth,expenses.getAllExpenses);
     router.get('/expenses/:id',userAuth,expenses.getExpensesByUserId);
     router.post('/expenses/create',userAuth,expenses.create);
     router.put('/expenses/update/:id',userAuth,expenses.update);
@@ -23,11 +23,25 @@ module.exports = (app) =>{
 
     
     const incomes =  require('../controllers/incomes.controller');
-    router.get('/incomes/',adminAuth,incomes.getAllIncomes);
+    router.get('/incomes',adminAuth,incomes.getAllIncomes);
     router.get('/incomes/:id',userAuth,incomes.getIncomesByUserId);
     router.post('/incomes/create',userAuth,incomes.create);
     router.put('/incomes/update/:id',userAuth,incomes.update);
     router.delete('/incomes/delete/:id',userAuth,incomes.delete);
+
+    const tags =  require('../controllers/tags.controller');
+    router.get('/tags',tags.getAllTags);
+    router.get('/tags/:id',tags.getTagById);
+    router.post('/tags/create',tags.create);
+    router.put('/tags/update/:id',tags.update);
+    router.delete('/tags/delete/:id',tags.delete);
+
+    const tagsExpenses =  require('../controllers/tags_expenses.controller');
+    router.get('/tagsExpenses',tagsExpenses.getAll);
+    router.get('/tagsExpenses/tag/:tagId',tagsExpenses.getByTagId);
+    router.get('/tagsExpenses/expense/:expenseId',tagsExpenses.getByExpenseId);
+    router.post('/tagsExpenses/create',tagsExpenses.create);
+    router.delete('/tagsExpenses/delete/:id',tagsExpenses.delete);
 
     app.use('/api',router)
 }
