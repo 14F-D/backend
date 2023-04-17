@@ -111,10 +111,11 @@ const users = {
             password: req.body.password,
             email: req.body.email,
         }
+        const hashedPassword = bcrypt.hashSync(`${user.password}`, 8);
         const sql = "update users set username = ?, password = ?, email = ? where id = ?";
         connection.query(
             sql,
-            [user.username, user.password, user.email, id],
+            [user.username, hashedPassword, user.email, id],
             (err, data) => {
                 if (err) {
                     res.status(500).send({
