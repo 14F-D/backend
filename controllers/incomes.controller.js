@@ -38,6 +38,7 @@ const incomes = {
     create(req, res) {
         const newIncome = {
             amount: req.body.amount,
+            type: req.body.type,
             date: new Date().toJSON(),
             userId: req.session.user.id
         };
