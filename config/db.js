@@ -4,7 +4,7 @@ const connection = mysql.createPool({
     host:'sql.freedb.tech',
     user:'freedb_budgetcalc',
     password:'9Y$k%2sRdC7YzNa',
-    database:'freedb_budgetcalc'
+    database:'freedb_budgetcalculator'
 });
 
 module.exports = connection;
