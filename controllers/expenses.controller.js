@@ -39,7 +39,7 @@ const expenses = {
         const newExpense = {
             amount: req.body.amount,
             date: new Date().toJSON(),
-            userId: 1
+            userId: req.session.user.id
         };
         const sql = 'insert into expenses set ?';
         connection.query(sql, newExpense, (err, data) => {
