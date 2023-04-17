@@ -38,7 +38,7 @@ const expenses = {
     create(req, res) {
         const newExpense = {
             amount: req.body.amount,
-            date: new Date(),
+            date: new Date().toLocaleString(),
             userId: req.session.user.id
         };
         const sql = 'insert into expenses set ?';
