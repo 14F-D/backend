@@ -87,9 +87,12 @@ const users = {
                 req.session.user = {
                     id: user.id,
                     username: user.username,
-                    role: user.role
+                    role: user.role,
                 };
-                res.json({ message: 'Logged in successfully' });
+                res.json({ 
+                    message: 'Logged in successfully',
+                    user: user,
+                 });
             });
         });
     },
