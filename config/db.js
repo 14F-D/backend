@@ -1,10 +1,10 @@
 const mysql = require("mysql");
 
 const connection = mysql.createPool({
-    host:'127.0.0.1',
-    user:'root',
-    password:'',
-    database:'budgetcalculator',
+    host:'bgs.jedlik.eu',
+    user:'bc',
+    password:'Bc2023',
+    database:'bc',
     dateStrings:true
 });
 
