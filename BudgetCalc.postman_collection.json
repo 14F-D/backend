@@ -1,0 +1,785 @@
+{
+	"info": {
+		"_postman_id": "61bb15b3-710c-4ed6-beb9-9acb1386a76f",
+		"name": "BudgetCalc",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "GetAllUsers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://14f-dbudgetcalc.cyclic.app/api/users",
+							"protocol": "https",
+							"host": [
+								"14f-dbudgetcalc",
+								"cyclic",
+								"app"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllUsersById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://14f-dbudgetcalc.cyclic.app/api/users/2",
+							"protocol": "https",
+							"host": [
+								"14f-dbudgetcalc",
+								"cyclic",
+								"app"
+							],
+							"path": [
+								"api",
+								"users",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateUserById",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"Tomi2\",\r\n    \"email\":\"tomi2@tomi2.com\",\r\n    \"password\":\"1234567890\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://14f-dbudgetcalc.cyclic.app/api/users/41",
+							"protocol": "https",
+							"host": [
+								"14f-dbudgetcalc",
+								"cyclic",
+								"app"
+							],
+							"path": [
+								"api",
+								"users",
+								"41"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteUserById",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://14f-dbudgetcalc.cyclic.app/api/users/41",
+							"protocol": "https",
+							"host": [
+								"14f-dbudgetcalc",
+								"cyclic",
+								"app"
+							],
+							"path": [
+								"api",
+								"users",
+								"41"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"Tomi2\",\r\n    \"password\":\"123456789\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://14f-dbudgetcalc.cyclic.app/api/login",
+							"protocol": "https",
+							"host": [
+								"14f-dbudgetcalc",
+								"cyclic",
+								"app"
+							],
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "https://14f-dbudgetcalc.cyclic.app/api/logout",
+							"protocol": "https",
+							"host": [
+								"14f-dbudgetcalc",
+								"cyclic",
+								"app"
+							],
+							"path": [
+								"api",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"Tomi2\",\r\n    \"email\":\"tomi2@tomi2.com\",\r\n    \"password\":\"123456789\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://14f-dbudgetcalc.cyclic.app/api/register",
+							"protocol": "https",
+							"host": [
+								"14f-dbudgetcalc",
+								"cyclic",
+								"app"
+							],
+							"path": [
+								"api",
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Expenses",
+			"item": [
+				{
+					"name": "GetAllExpenses",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://14f-dbudgetcalc.cyclic.app/api/expenses",
+							"protocol": "https",
+							"host": [
+								"14f-dbudgetcalc",
+								"cyclic",
+								"app"
+							],
+							"path": [
+								"api",
+								"expenses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllExpensesByUserId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://14f-dbudgetcalc.cyclic.app/api/expenses/30",
+							"protocol": "https",
+							"host": [
+								"14f-dbudgetcalc",
+								"cyclic",
+								"app"
+							],
+							"path": [
+								"api",
+								"expenses",
+								"30"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateExpenses",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "amount",
+									"value": "1500",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://14f-dbudgetcalc.cyclic.app/api/expenses/create",
+							"protocol": "https",
+							"host": [
+								"14f-dbudgetcalc",
+								"cyclic",
+								"app"
+							],
+							"path": [
+								"api",
+								"expenses",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateExpenses",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "amount",
+									"value": "2000",
+									"type": "default"
+								},
+								{
+									"key": "date",
+									"value": "2002-03-10",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://14f-dbudgetcalc.cyclic.app/api/expenses/update/41",
+							"protocol": "https",
+							"host": [
+								"14f-dbudgetcalc",
+								"cyclic",
+								"app"
+							],
+							"path": [
+								"api",
+								"expenses",
+								"update",
+								"41"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteExpenses",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "https://14f-dbudgetcalc.cyclic.app/api/expenses/delete/41",
+							"protocol": "https",
+							"host": [
+								"14f-dbudgetcalc",
+								"cyclic",
+								"app"
+							],
+							"path": [
+								"api",
+								"expenses",
+								"delete",
+								"41"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Incomes",
+			"item": [
+				{
+					"name": "GetAllIncomes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://14f-dbudgetcalc.cyclic.app/api/incomes",
+							"protocol": "https",
+							"host": [
+								"14f-dbudgetcalc",
+								"cyclic",
+								"app"
+							],
+							"path": [
+								"api",
+								"incomes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllIncomesByUserId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://14f-dbudgetcalc.cyclic.app/api/incomes/2",
+							"protocol": "https",
+							"host": [
+								"14f-dbudgetcalc",
+								"cyclic",
+								"app"
+							],
+							"path": [
+								"api",
+								"incomes",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateIncomes",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "amount",
+									"value": "1500",
+									"type": "default"
+								},
+								{
+									"key": "type",
+									"value": "salary",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://14f-dbudgetcalc.cyclic.app/api/incomes/create",
+							"protocol": "https",
+							"host": [
+								"14f-dbudgetcalc",
+								"cyclic",
+								"app"
+							],
+							"path": [
+								"api",
+								"incomes",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateIncomes",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "amount",
+									"value": "2000",
+									"type": "default"
+								},
+								{
+									"key": "type",
+									"value": "salary",
+									"type": "default"
+								},
+								{
+									"key": "date",
+									"value": "2010-10-02",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://14f-dbudgetcalc.cyclic.app/api/incomes/update/41",
+							"protocol": "https",
+							"host": [
+								"14f-dbudgetcalc",
+								"cyclic",
+								"app"
+							],
+							"path": [
+								"api",
+								"incomes",
+								"update",
+								"41"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteIncomes",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "amount",
+									"value": "1500",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://14f-dbudgetcalc.cyclic.app/api/incomes/delete/41",
+							"protocol": "https",
+							"host": [
+								"14f-dbudgetcalc",
+								"cyclic",
+								"app"
+							],
+							"path": [
+								"api",
+								"incomes",
+								"delete",
+								"41"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tags",
+			"item": [
+				{
+					"name": "GetAllTags",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://14f-dbudgetcalc.cyclic.app/api/tags",
+							"protocol": "https",
+							"host": [
+								"14f-dbudgetcalc",
+								"cyclic",
+								"app"
+							],
+							"path": [
+								"api",
+								"tags"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllTagsById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://14f-dbudgetcalc.cyclic.app/api/tags/2",
+							"protocol": "https",
+							"host": [
+								"14f-dbudgetcalc",
+								"cyclic",
+								"app"
+							],
+							"path": [
+								"api",
+								"tags",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateTags",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "fun",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://14f-dbudgetcalc.cyclic.app/api/tags/create",
+							"protocol": "https",
+							"host": [
+								"14f-dbudgetcalc",
+								"cyclic",
+								"app"
+							],
+							"path": [
+								"api",
+								"tags",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateTags",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Fun",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://14f-dbudgetcalc.cyclic.app/api/tags/update/31",
+							"protocol": "https",
+							"host": [
+								"14f-dbudgetcalc",
+								"cyclic",
+								"app"
+							],
+							"path": [
+								"api",
+								"tags",
+								"update",
+								"31"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteTags",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "amount",
+									"value": "1500",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://14f-dbudgetcalc.cyclic.app/api/tags/delete/31",
+							"protocol": "https",
+							"host": [
+								"14f-dbudgetcalc",
+								"cyclic",
+								"app"
+							],
+							"path": [
+								"api",
+								"tags",
+								"delete",
+								"31"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TagsExpenses",
+			"item": [
+				{
+					"name": "GetAllTagsExpenses",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://14f-dbudgetcalc.cyclic.app/api/tagsExpenses",
+							"protocol": "https",
+							"host": [
+								"14f-dbudgetcalc",
+								"cyclic",
+								"app"
+							],
+							"path": [
+								"api",
+								"tagsExpenses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByTagId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://14f-dbudgetcalc.cyclic.app/api/tagsExpenses/tag/2",
+							"protocol": "https",
+							"host": [
+								"14f-dbudgetcalc",
+								"cyclic",
+								"app"
+							],
+							"path": [
+								"api",
+								"tagsExpenses",
+								"tag",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByExpenseId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://14f-dbudgetcalc.cyclic.app/api/tagsExpenses/expense/2",
+							"protocol": "https",
+							"host": [
+								"14f-dbudgetcalc",
+								"cyclic",
+								"app"
+							],
+							"path": [
+								"api",
+								"tagsExpenses",
+								"expense",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateTagsExpenses",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "tagId",
+									"value": "3",
+									"type": "default"
+								},
+								{
+									"key": "expenseId",
+									"value": "4",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://14f-dbudgetcalc.cyclic.app/api/tagsExpenses/create",
+							"protocol": "https",
+							"host": [
+								"14f-dbudgetcalc",
+								"cyclic",
+								"app"
+							],
+							"path": [
+								"api",
+								"tagsExpenses",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteTags",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "amount",
+									"value": "1500",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://14f-dbudgetcalc.cyclic.app/api/tagsExpenses/delete/41",
+							"protocol": "https",
+							"host": [
+								"14f-dbudgetcalc",
+								"cyclic",
+								"app"
+							],
+							"path": [
+								"api",
+								"tagsExpenses",
+								"delete",
+								"41"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
