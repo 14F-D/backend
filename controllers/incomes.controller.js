@@ -39,7 +39,7 @@ const incomes = {
         const newIncome = {
             amount: req.body.amount,
             type: req.body.type,
-            date: new Date().toJSON(),
+            date: new Date(),
             userId: req.session.user.id
         };
         const sql = 'insert into incomes set ?';
