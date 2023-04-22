@@ -6,7 +6,7 @@ const cookieParser = require('cookie-parser');
 
 
 const corsOptions = {
-    origin:['http://localhost:5173','http://127.0.0.1:5173'],
+    origin:['http://localhost:5173','http://127.0.0.1:5173/'],
     credentials: true,
     exposedHeaders:['set-cookie']
 }
@@ -23,7 +23,7 @@ app.use(session({
     secret: crypto.randomBytes(20).toString('hex') ,
     resave: false,
     saveUninitialized: false,
-    cookie: { secure:true, maxAge: 600000,sameSite:'none', sameSite:"lax"},
+    cookie: { secure:false, maxAge: 600000,sameSite:'lax', domain:"localhost"},
     rolling: true
     
 }));
