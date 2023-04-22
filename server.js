@@ -10,7 +10,6 @@ const corsOptions = {
     credentials: true,
     methods: "GET, POST, PUT, DELETE",
     exposedHeaders:['set-cookie'],
-    InsecurePrivateNetworkRequestsAllowed:true
 }
 
 
@@ -29,7 +28,7 @@ app.use(session({
     resave: true,
     saveUninitialized: false,
     unset: "destroy",
-    cookie: { secure:true, maxAge: 600000,sameSite:'none'},
+    cookie: { secure:'auto', maxAge: 600000,sameSite:'lax'},
     rolling: true
 }));
 
