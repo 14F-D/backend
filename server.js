@@ -28,7 +28,7 @@ app.use(session({
     resave: true,
     saveUninitialized: false,
     unset: "destroy",
-    cookie: { secure:true, maxAge: 600000,sameSite:'none'},
+    cookie: { secure:false, maxAge: 600000,sameSite:'lax'},
     rolling: true
 }));
 
