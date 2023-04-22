@@ -6,9 +6,11 @@ const cookieParser = require('cookie-parser');
 
 
 const corsOptions = {
-    origin:['http://localhost:5173','http://127.0.0.1:5173/'],
+    origin:['https://14f-dbudget.netlify.app','http://localhost:5173','http://127.0.0.1:5173','http://192.168.1.122:5173'],
     credentials: true,
-    exposedHeaders:['set-cookie']
+    methods: "GET, POST, PUT, DELETE",
+    exposedHeaders:['set-cookie'],
+    InsecurePrivateNetworkRequestsAllowed:true
 }
 
 
@@ -19,13 +21,16 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
 
+
+
 app.use(session({
+    name: "userSession",
     secret: crypto.randomBytes(20).toString('hex') ,
-    resave: false,
+    resave: true,
     saveUninitialized: false,
-    cookie: { secure:false, maxAge: 600000,sameSite:'lax', domain:"localhost"},
+    unset: "destroy",
+    cookie: { secure:true, maxAge: 600000,sameSite:'none', httpOnly:true},
     rolling: true
-    
 }));
 
 app.get('/',(req,res)=>{
