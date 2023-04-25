@@ -90,11 +90,10 @@ const users = {
                     role: user.role,
                 };
                 req.session.save();
-                res.json({ 
+                res.send({ 
                     message: 'Logged in successfully',
                     user: user,
                  });
-                res.end();
             });
         });
     },
