@@ -21,7 +21,7 @@ app.use(cookieParser());
 
 
 app.use(session({
-    secret: crypto.randomBytes(20).toString('hex') ,
+    secret: 'asd123123',
     resave: true,
     saveUninitialized: true,
 }));
