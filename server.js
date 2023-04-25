@@ -6,7 +6,7 @@ const cookieParser = require('cookie-parser');
 
 
 const corsOptions = {
-    origin:['https://14f-dbudget.netlify.app','http://localhost:5173','http://127.0.0.1:5173','http://192.168.1.122:5173'],
+    origin:['https://14f-dbudget.netlify.app','https://14f-dbudgetcalc.cyclic.app','http://localhost:5173','http://127.0.0.1:5173','http://192.168.1.122:5173'],
     credentials: true,
 }
 
