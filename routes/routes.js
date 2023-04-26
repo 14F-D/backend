@@ -17,7 +17,7 @@ module.exports = (app) =>{
     router.post('/register',users.register);
     router.put('/users/:id',userAuth,users.update);
     router.delete('/users/:id',userAuth,users.delete);
-    router.get('/users/:id',adminAuth,users.getUsersById);
+    router.get('/users/:id',userAuth,users.getUsersById);
     router.post('/login',users.login);
     router.post('/logout',users.logout);
 
