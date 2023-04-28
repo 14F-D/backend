@@ -30,18 +30,18 @@ module.exports = (app) =>{
     router.delete('/incomes/delete/:id',userAuth,incomes.delete);
 
     const tags =  require('../controllers/tags.controller');
-    router.get('/tags',tags.getAllTags);
-    router.get('/tags/:id',tags.getTagById);
-    router.post('/tags/create',tags.create);
-    router.put('/tags/update/:id',tags.update);
-    router.delete('/tags/delete/:id',tags.delete);
+    router.get('/tags',userAuth,tags.getAllTags);
+    router.get('/tags/:id',userAuth,tags.getTagById);
+    router.post('/tags/create',adminAuth,tags.create);
+    router.put('/tags/update/:id',adminAuth,tags.update);
+    router.delete('/tags/delete/:id',adminAuth,tags.delete);
 
     const tagsExpenses =  require('../controllers/tags_expenses.controller');
-    router.get('/tagsExpenses',tagsExpenses.getAll);
-    router.get('/tagsExpenses/tag/:tagId',tagsExpenses.getByTagId);
-    router.get('/tagsExpenses/expense/:expenseId',tagsExpenses.getByExpenseId);
-    router.post('/tagsExpenses/create',tagsExpenses.create);
-    router.delete('/tagsExpenses/delete/:id',tagsExpenses.delete);
+    router.get('/tagsExpenses',userAuth,tagsExpenses.getAll);
+    router.get('/tagsExpenses/tag/:tagId',userAuth,tagsExpenses.getByTagId);
+    router.get('/tagsExpenses/expense/:expenseId',userAuth,tagsExpenses.getByExpenseId);
+    router.post('/tagsExpenses/create',userAuth,tagsExpenses.create);
+    router.delete('/tagsExpenses/delete/:id',userAuth,tagsExpenses.delete);
 
     app.use('/api',router)
 }
