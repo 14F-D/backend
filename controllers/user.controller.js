@@ -48,7 +48,7 @@ const users = {
 
         const sql = "INSERT INTO users SET ?"
 
-        connection.query(sql, { username, password: hashedPassword, email, role: "admin" }, (error, results) => {
+        connection.query(sql, { username, password: hashedPassword, email, role: "standard" }, (error, results) => {
             if (error) {
                 console.log(error);
                 res.status(500).json({ message: 'An error occurred' });
