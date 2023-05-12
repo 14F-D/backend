@@ -59,7 +59,7 @@ const tagsExpenses = {
     create(req, res) {
         const newTagsExpenses = {
             tagId: req.body.tagId,
-            expenseId: req.body.tagId
+            expenseId: req.body.expenseId
         };
         const sql = 'insert into tags_expenses set ?';
         connection.query(sql, newTagsExpenses, (err, data) => {
